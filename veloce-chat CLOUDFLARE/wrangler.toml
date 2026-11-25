@@ -1,0 +1,17 @@
+name = "veloce-chat"
+main = "src/index.js"
+compatibility_date = "2026-11-19"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "veloce-chat-db"
+database_id = "c2df569b-88e4-47f1-ae62-af2126a4ca4b"
+migrations_dir = "migrations"
+
+[observability]
+enabled = true
