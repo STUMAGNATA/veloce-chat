@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131d">
+  <title>Loop — vídeos que conectam</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b0e16;--panel:#131827;--panel2:#1a2031;--text:#f4f6fb;--muted:#9ba5ba;--line:#293148;--accent:#8b7cff;--mint:#66e0c2}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+    button,input{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:235px minmax(0,1fr) 280px;max-width:1500px;margin:auto}
+    aside{padding:28px 18px;border-right:1px solid var(--line);position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:850;letter-spacing:-1.3px;margin:0 10px 38px}.brand-mark{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--mint));display:grid;place-items:center;color:#111522;font-weight:900}
+    .nav{display:grid;gap:8px}.nav button,.side-action{border:0;background:transparent;color:var(--muted);padding:12px 13px;border-radius:13px;text-align:left;display:flex;gap:13px;align-items:center;font-weight:650}.nav button:hover,.nav button.active{background:var(--panel2);color:var(--text)}.nav .symbol{font-size:19px;width:22px;text-align:center}.side-note{position:absolute;bottom:28px;left:25px;right:25px;color:var(--muted);font-size:12px}
+    main{padding:25px clamp(16px,4vw,55px);max-width:850px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.eyebrow{color:var(--muted);font-size:13px}.topbar h1{font-size:25px;letter-spacing:-.7px;margin:3px 0}.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffc47b,#8b7cff);display:grid;place-items:center;color:#171522;font-weight:800}
+    .tabs{display:flex;gap:9px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}.tabs button{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 15px;border-radius:99px}.tabs button.active{background:#292444;border-color:#6255a9;color:#fff}
+    .composer{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:13px;border-radius:17px;margin-bottom:22px}.composer input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text)}.primary{border:0;border-radius:11px;background:var(--accent);color:white;padding:10px 15px;font-weight:750}.primary:hover{filter:brightness(1.12)}
+    .feed{display:grid;gap:20px}.post{display:grid;grid-template-columns:minmax(0,1fr) 58px;gap:13px;align-items:end}.video{height:min(68vh,620px);min-height:390px;border-radius:21px;overflow:hidden;position:relative;background:#252b42;isolation:isolate;box-shadow:0 12px 35px #0005}.scene{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}.scene:before,.scene:after{content:"";position:absolute;border-radius:50%;filter:blur(1px)}.scene:before{width:65%;aspect-ratio:1;background:#ffffff20;top:-18%;right:-18%}.scene:after{width:75%;aspect-ratio:1;background:#090d1c55;bottom:-38%;left:-20%}.scene.one{background:linear-gradient(145deg,#f6a66f,#9a5d9c 55%,#273d67)}.scene.two{background:linear-gradient(145deg,#193c50,#3c9b91 55%,#b5c77a)}.scene.three{background:linear-gradient(145deg,#28234f,#8058a8 50%,#e49b9b)}.scene.four{background:linear-gradient(145deg,#d58a48,#8d483c 50%,#292b4d)}
+    .scene-word{position:relative;z-index:1;text-align:center;font-size:clamp(34px,6vw,68px);font-weight:900;letter-spacing:-3px;text-shadow:0 4px 24px #0005;padding:20px}.scene-word small{display:block;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+    .video-shade{position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#090b14dd);z-index:1}.post-info{position:absolute;z-index:2;bottom:19px;left:19px;right:18px}.creator{font-weight:800;margin-bottom:7px}.caption{max-width:90%;color:#f0f1f7}.tags{color:#c6c1ff;margin-top:8px;font-size:13px}.sound{font-size:12px;color:#d4d7e4;margin-top:10px}.actions{display:grid;gap:17px;justify-items:center;padding-bottom:7px}.action{border:0;background:transparent;color:var(--muted);display:grid;gap:4px;justify-items:center;padding:3px}.action .bubble{width:45px;height:45px;border-radius:50%;display:grid;place-items:center;background:var(--panel2);font-size:19px}.action span:last-child{font-size:11px}.action.liked .bubble{background:#3a2540;color:#ff91b7}
+    .right{border-left:1px solid var(--line);padding:30px 19px}.right h3{font-size:14px;margin:5px 0 14px}.trend{padding:13px 0;border-bottom:1px solid var(--line)}.trend small{color:var(--muted)}.trend strong{display:block;margin:3px 0}.profile-card{background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:17px;margin-top:28px}.profile-card p{color:var(--muted);font-size:13px}.profile-card button{width:100%;margin-top:5px}
+    .empty{color:var(--muted);text-align:center;padding:35px 10px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#f4f6fb;color:#171a25;padding:11px 17px;border-radius:12px;font-weight:700;box-shadow:0 8px 30px #0006;display:none;z-index:10}
+    @media(max-width:1050px){.app{grid-template-columns:190px minmax(0,1fr)}.right{display:none}}@media(max-width:650px){.app{display:block;padding-bottom:65px}aside{position:fixed;z-index:5;top:auto;bottom:0;left:0;right:0;width:100%;height:62px;padding:7px 10px;background:#101522;border:0;border-top:1px solid var(--line)}.brand,.side-note{display:none}.nav{display:flex;justify-content:space-around}.nav button{padding:8px 12px;display:grid;gap:1px;justify-items:center;font-size:10px}.nav .symbol{font-size:18px}.nav button span:last-child{display:block}main{padding:20px 12px}.topbar{margin-bottom:16px}.video{height:65vh;min-height:420px}.post{grid-template-columns:minmax(0,1fr) 45px;gap:8px}.action .bubble{width:39px;height:39px}.composer{padding:10px}.composer .primary{padding:9px 11px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand"><span class="brand-mark">L</span> loop</div>
+      <nav class="nav" aria-label="Navegação principal">
+        <button class="active" data-nav="Para você"><span class="symbol">⌂</span><span>Para você</span></button>
+        <button data-nav="Seguindo"><span class="symbol">◎</span><span>Seguindo</span></button>
+        <button data-nav="Explorar"><span class="symbol">⌕</span><span>Explorar</span></button>
+        <button data-nav="Mensagens"><span class="symbol">✉</span><span>Mensagens</span></button>
+        <button data-nav="Perfil"><span class="symbol">◉</span><span>Meu perfil</span></button>
+      </nav>
+      <div class="side-note">Feito para descobrir ideias, pessoas e momentos.<br><br>© 2026 Loop Social</div>
+    </aside>
+    <main>
+      <header class="topbar"><div><div class="eyebrow">SEU ESPAÇO DE DESCOBERTAS</div><h1>O que está rolando?</h1></div><div class="avatar" aria-label="Seu perfil">S</div></header>
+      <div class="tabs" role="tablist"><button class="active" data-filter="all">Destaques</button><button data-filter="new">Recentes</button><button data-filter="creative">Criatividade</button></div>
+      <form class="composer" id="composer"><div class="avatar">S</div><input id="idea" placeholder="Compartilhe uma ideia..." aria-label="Escreva uma ideia"><button class="primary" type="submit">Publicar</button></form>
+      <section class="feed" id="feed" aria-label="Feed de vídeos">
+        <article class="post" data-kind="creative">
+          <div class="video"><div class="scene one"><div class="scene-word">Crie.<small>um dia de cada vez</small></div></div><div class="video-shade"></div><div class="post-info"><div class="creator">@marina.cria</div><div class="caption">Pequenas ideias também podem virar grandes projetos. ✨</div><div class="tags">#criatividade #processo #inspiracao</div><div class="sound">♫ Som original — Marina</div></div></div>
+          <div class="actions"><button class="action like"><span class="bubble">♡</span><span class="count">2,4 mil</span></button><button class="action comment"><span class="bubble">▢</span><span>128</span></button><button class="action share"><span class="bubble">↗</span><span>Enviar</span></button></div>
+        </article>
+        <article class="post" data-kind="new">
+          <div class="video"><div class="scene two"><div class="scene-word">Respira.<small>o caminho também importa</small></div></div><div class="video-shade"></div><div class="post-info"><div class="creator">@leo.natureza</div><div class="caption">Uma pausa no meio da correria para observar o mundo. 🌿</div><div class="tags">#natureza #calma #cotidiano</div><div class="sound">♫ Som ambiente — Leo</div></div></div>
+          <div class="actions"><button class="action like"><span class="bubble">♡</span><span class="count">986</span></button><button class="action comment"><span class="bubble">▢</span><span>42</span></button><button class="action share"><span class="bubble">↗</span><span>Enviar</span></button></div>
+        </article>
+        <article class="post" data-kind="creative">
+          <div class="video"><div class="scene three"><div class="scene-word">Faça acontecer.<small>seu próximo capítulo começa hoje</small></div></div><div class="video-shade"></div><div class="post-info"><div class="creator">@studio.nova</div><div class="caption">Bastidores de um projeto que saiu do papel. 💜</div><div class="tags">#design #estudio #criadores</div><div class="sound">♫ Faixa original — Studio Nova</div></div></div>
+          <div class="actions"><button class="action like"><span class="bubble">♡</span><span class="count">1,1 mil</span></button><button class="action comment"><span class="bubble">▢</span><span>76</span></button><button class="action share"><span class="bubble">↗</span><span>Enviar</span></button></div>
+        </article>
+      </section>
+    </main>
+    <section class="right" aria-label="Descobertas"><h3>Assuntos em alta</h3><div class="trend"><small>01 · CRIATIVIDADE</small><strong>#IdeiasEmMovimento</strong><small>8,2 mil publicações</small></div><div class="trend"><small>02 · DIA A DIA</small><strong>#MeuPequenoMundo</strong><small>5,7 mil publicações</small></div><div class="trend"><small>03 · APRENDIZADO</small><strong>#AprendiHoje</strong><small>3,1 mil publicações</small></div><div class="profile-card"><strong>Seu próximo loop começa aqui.</strong><p>Encontre novos criadores e compartilhe aquilo que faz seu mundo único.</p><button class="primary" id="discover">Explorar criadores</button></div></section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function notify(message){toast.textContent=message;toast.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.style.display='none',2300)}
+    document.querySelectorAll('.like').forEach(button=>button.addEventListener('click',()=>{const liked=button.classList.toggle('liked');button.querySelector('.bubble').textContent=liked?'♥':'♡';const count=button.querySelector('.count');if(count)count.textContent=liked?'Curtido':count.textContent.replace(' · curtido','')+' · curtido'}));
+    document.querySelectorAll('.comment').forEach(button=>button.addEventListener('click',()=>notify('Comentários: espaço para conversar em breve!')));
+    document.querySelectorAll('.share').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);notify('Link copiado!')}catch{notify('Compartilhamento disponível em breve.')}}));
+    document.querySelectorAll('[data-nav]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-nav]').forEach(b=>b.classList.remove('active'));button.classList.add('active');if(button.dataset.nav!=='Para você')notify(button.dataset.nav+' estará disponível em breve.');}));
+    document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>b.classList.remove('active'));button.classList.add('active');document.querySelectorAll('.post').forEach(post=>post.hidden=button.dataset.filter!=='all'&&post.dataset.kind!==button.dataset.filter)}));
+    document.getElementById('composer').addEventListener('submit',event=>{event.preventDefault();const input=document.getElementById('idea');if(!input.value.trim())return notify('Escreva algo antes de publicar.');const post=document.createElement('article');post.className='post';post.dataset.kind='new';post.innerHTML='<div class="video"><div class="scene four"><div class="scene-word">Nova ideia.<small>publicação da comunidade</small></div></div><div class="video-shade"></div><div class="post-info"><div class="creator">@voce</div><div class="caption"></div><div class="tags">#loop #novidade</div></div></div><div class="actions"><button class="action like"><span class="bubble">♡</span><span>0</span></button><button class="action comment"><span class="bubble">▢</span><span>0</span></button><button class="action share"><span class="bubble">↗</span><span>Enviar</span></button></div>';post.querySelector('.caption').textContent=input.value.trim();document.getElementById('feed').prepend(post);input.value='';post.querySelector('.like').addEventListener('click',e=>{e.currentTarget.classList.toggle('liked');e.currentTarget.querySelector('.bubble').textContent=e.currentTarget.classList.contains('liked')?'♥':'♡'});post.querySelector('.comment').addEventListener('click',()=>notify('Comentários estarão disponíveis em breve!'));post.querySelector('.share').addEventListener('click',()=>notify('Compartilhamento disponível em breve.'));notify('Sua publicação foi adicionada ao feed!');});
+    document.getElementById('discover').addEventListener('click',()=>notify('Novos criadores chegando em breve!'));
+  </script>
+</body>
+</html>
